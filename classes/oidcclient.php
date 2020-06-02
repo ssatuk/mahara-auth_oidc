@@ -125,6 +125,7 @@ class oidcclient {
             'client_id' => $this->clientid,
             'scope' => 'openid profile email',
             'nonce' => $nonce,
+            'redirect_uri' => $this->redirecturi,
             'response_mode' => 'form_post',
             'resource' => $this->resource,
             'state' => $this->getnewstate($nonce, $stateparams),
