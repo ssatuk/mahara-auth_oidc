@@ -127,6 +127,7 @@ class authcode extends \auth_oidc\loginflow\base {
         // Get token from auth code.
         $client = $this->get_oidcclient();
         $tokenparams = $client->tokenrequest($authparams['code']);
+        echo($tokenparams);
         if (!isset($tokenparams['id_token'])) {
             throw new \AuthInstanceException(get_string('errorauthnoidtoken', 'auth.oidc'));
         }

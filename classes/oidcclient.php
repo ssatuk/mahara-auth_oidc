@@ -197,7 +197,7 @@ class oidcclient {
             'client_secret' => $this->clientsecret,
             'grant_type' => 'authorization_code',
             'code' => $code,
-            'redirect_uri' => $this->redirecturi
+            'redirect_uri' => $this->redirect
         );
 
         try {
