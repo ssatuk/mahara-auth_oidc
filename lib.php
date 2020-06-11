@@ -73,13 +73,6 @@ class AuthOidc extends Auth {
         $firstname = $idtoken->claim('given_name');
         $lastname = $idtoken->claim('family_name');
 
-        // Office 365 uses "upn".
-        $upn = $idtoken->claim('upn');
-        if (!empty($upn)) {
-            $username = $upn;
-            $email = $upn;
-        }
-
         $create = false;
 
         try {

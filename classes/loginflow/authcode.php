@@ -152,12 +152,7 @@ class authcode extends \auth_oidc\loginflow\base {
             redirect('/');
         }
         else {
-            // Office 365 uses "upn".
             $oidcusername = $oidcuniqid;
-            $upn = $idtoken->claim('upn');
-            if (!empty($upn)) {
-                $oidcusername = $upn;
-            }
 
             $SESSION->set('auth_oidc_linkdata', array(
                 'authinstance' => $instanceid,
