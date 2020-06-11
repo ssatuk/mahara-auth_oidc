@@ -192,9 +192,14 @@ class oidcclient {
             throw new \AuthInstanceException(get_string('erroroidcclientnotokenendpoint', 'auth.oidc'));
         }
 
+        $authHeader = "Authorization: Basic " . base64_encode("$this->clientid:$this->clientsecret");
+
+        $this->httpclient->setHeader(array($authHeader));
+
+
         $params = array(
             'client_id' => $this->clientid,
-            'client_secret' => $this->clientsecret,
+            //'client_secret' => $this->clientsecret,
             'grant_type' => 'authorization_code',
             'code' => $code,
             'redirect_uri' => $this->redirecturi
