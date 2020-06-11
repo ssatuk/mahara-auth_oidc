@@ -109,11 +109,9 @@ class base {
             throw new \AuthInstanceException(get_string('errorauthinvalididtoken', 'auth.oidc'));
         }
 
-        // Use 'oid' if available (Azure-specific), or fall back to standard "sub" claim.
-        $oidcuniqid = $idtoken->claim('oid');
-        if (empty($oidcuniqid)) {
-            $oidcuniqid = $idtoken->claim('sub');
-        }
+        // original version of this code preferred "oid" claim from AAD if available
+        // we always want "sub" claim  which is the IdSrv identity
+        $oidcuniqid = $idtoken->claim('sub');
         return array($oidcuniqid, $idtoken);
     }
 }
