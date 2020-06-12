@@ -5,7 +5,7 @@
  * @subpackage auth-oidc
  * @author James McQuillan <james.mcquillan@remote-learner.net>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @copyright (C) 2015 onwards Microsoft Open Technologies, Inc. (http://msopentech.com/)
+ * @copyright (C) 2015 onwards Microsoft Open Technologies, Inc. (http://msopentech.com/), mods (C) SSAT 2020
  */
 
 defined('INTERNAL') || die();
@@ -68,7 +68,8 @@ class AuthOidc extends Auth {
         global $USER, $SESSION;
         $this->must_be_ready();
 
-        $username = $oidcuniqid;
+        //$username = $oidcuniqid;
+        $username = strtolower($idtoken->claim('email')); // we want to use email to match our Moodle usage
         $email = $idtoken->claim('email');
         $firstname = $idtoken->claim('given_name');
         $lastname = $idtoken->claim('family_name');
