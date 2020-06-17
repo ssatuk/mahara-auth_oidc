@@ -68,8 +68,10 @@ class AuthOidc extends Auth {
         global $USER, $SESSION;
         $this->must_be_ready();
 
+        // SSAT force username to be sanitised email to match our Moodle use
         //$username = $oidcuniqid;
-        $username = strtolower($idtoken->claim('email')); // we want to use email to match our Moodle usage
+        $username = str_replace("+", "_", strtolower($idtoken->claim('email')));
+        // End SSAT force username to be sanitised email to match our Moodle use
         $email = $idtoken->claim('email');
         $firstname = $idtoken->claim('given_name');
         $lastname = $idtoken->claim('family_name');
