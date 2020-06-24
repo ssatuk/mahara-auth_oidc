@@ -121,4 +121,20 @@ class jwt {
     public function claim($claim) {
         return (isset($this->claims[$claim])) ? $this->claims[$claim] : null;
     }
+
+    // SSAT MHA-5
+    /**
+     * Get a single value of a claim.
+     *
+     * @param string $claim The name of the claim to get.
+     * @return mixed The first value of the claim.
+     */
+    public function single_valued_claim($claim){
+        $val = (isset($this->claims[$claim])) ? $this->claims[$claim] : null;
+        if((!is_null($val)) && is_array($val)) {
+            $val = $val[0];
+        }
+        return $val;
+    }
+    // End  SSAT MHA-5
 }

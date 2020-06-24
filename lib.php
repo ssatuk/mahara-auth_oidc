@@ -73,9 +73,10 @@ class AuthOidc extends Auth {
         $username = str_replace("+", "_", strtolower($idtoken->claim('email')));
         // End SSAT force username to be sanitised email to match our Moodle use
         $email = $idtoken->claim('email');
-        $firstname = $idtoken->claim('given_name');
-        $lastname = $idtoken->claim('family_name');
-
+        //SSAT MHA-5
+        $firstname = $idtoken->single_valued_claim('given_name');
+        $lastname = $idtoken->single_valued_claim('family_name');
+        //End SSAT MHA-5
         $create = false;
 
         try {
