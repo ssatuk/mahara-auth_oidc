@@ -44,5 +44,6 @@ $string['settings_tokenendpoint'] = 'Token Endpoint';
 $string['settings_tokenendpoint_default'] = 'https://login.windows.net/common/oauth2/token';
 $string['settings_resource'] = 'Resource';
 $string['settings_resource_default'] = 'https://graph.windows.net';
+$string['settings_additionalscopes'] = 'Additional OIDC scopes (space separated)';
 $string['settings_institutionattribute'] = 'Institution Match Attribute';
 $string['settings_institutionvalue'] = 'Institution Match Value';

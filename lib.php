@@ -172,6 +172,9 @@ class PluginAuthOidc extends PluginAuth {
             'tokenendpoint' => get_string('settings_tokenendpoint_default', 'auth.oidc'),
             'resource' => get_string('settings_resource_default', 'auth.oidc'),
             'autocreateusers' => 0,
+            // SSAT MHA-2
+            'additionalscopes' => '',
+            // End SSAT MHA-2
         );
         $curconfig = array();
         foreach ($configparams as $key => $default) {
@@ -231,6 +234,18 @@ class PluginAuthOidc extends PluginAuth {
                     'help'  => false,
                     'defaultvalue' => $curconfig['tokenendpoint'],
                 ),
+                // SSAT MHA-2
+                'additionalscopes' => array(
+                    'type'  => 'text',
+                    'title' => get_string('settings_additionalscopes', 'auth.oidc'),
+                    'size' => 50,
+                    'rules' => array(
+                        'required' => false,
+                    ),
+                    'help'  => false,
+                    'defaultvalue' => $curconfig['additionalscopes'],
+                ),
+                // End SSAT MHA-2
                 'resource' => array(
                     'type'  => 'text',
                     'title' => get_string('settings_resource', 'auth.oidc'),

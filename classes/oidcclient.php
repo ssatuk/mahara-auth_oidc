@@ -31,6 +31,11 @@ class oidcclient {
     /** @var array Array of endpoints. */
     protected $endpoints = array();
 
+    // SSAT MHA-2
+    /** @var string Additional OIDC scopes. */
+    protected $additionalscopes;
+    // End SSAT MHA-2
+
     /**
      * Constructor.
      *
@@ -46,12 +51,18 @@ class oidcclient {
      * @param string $id The registered client ID.
      * @param string $secret The registered client secret.
      * @param string $redirecturi The registered client redirect URI.
+     * @param string $additionalscopes Additional OIDC scopes  //SSAT MHA-2
      */
-    public function setcreds($id, $secret, $redirecturi, $resource) {
+        public function setcreds($id, $secret, $redirecturi, $resource, $additionalscopes = null) {
         $this->clientid = $id;
         $this->clientsecret = $secret;
         $this->redirecturi = $redirecturi;
         $this->resource = (!empty($resource)) ? $resource : 'https://graph.windows.net';
+        // SSAT MHA-2
+        if (! is_null($additionalscopes)) {
+            $this->additionalscopes = $additionalscopes;
+        }
+        // End SSAT MHA-2
     }
 
     /**
@@ -120,10 +131,16 @@ class oidcclient {
      */
     protected function getauthrequestparams($promptlogin = false, array $stateparams = array()) {
         $nonce = 'N'.uniqid();
+        // SSAT MHA-2
+        $scopes = 'openid profile email';
+        if (isset($this->additionalscopes)) {
+            $scopes = $scopes . ' ' . $this->additionalscopes;
+        }
+        // End SSAT MHA-2
         $params = array(
             'response_type' => 'code',
             'client_id' => $this->clientid,
-            'scope' => 'openid profile email',
+            'scope' => $scopes,
             'nonce' => $nonce,
             'redirect_uri' => $this->redirecturi,
             'response_mode' => 'form_post',

@@ -34,6 +34,9 @@ class base {
             'resource' => '',
             'authendpoint' => '',
             'tokenendpoint' => '',
+            // SSAT MHA-2
+            'additionalscopes' => '',
+            // End SSAT-MHA-2
         );
         foreach ($storedconfig as $key => $value) {
             $saved = get_config_plugin('auth', 'oidc', $key);
@@ -82,9 +85,16 @@ class base {
         $clientsecret = (isset($this->config->clientsecret)) ? $this->config->clientsecret : null;
         $redirecturi = $this->config->redirecturi;
         $resource = (isset($this->config->oidcresource)) ? $this->config->oidcresource : null;
+        // SSAT MHA-2
+        $additionalscopes = (isset($this->config->additionalscopes)) ? $this->config->additionalscopes : null;
+        // End SSAT MHA-2
 
         $client = new \auth_oidc\oidcclient($this->httpclient);
-        $client->setcreds($clientid, $clientsecret, $redirecturi, $resource);
+        
+        // SSAT MHA-2
+        //$client->setcreds($clientid, $clientsecret, $redirecturi, $resource);
+        $client->setcreds($clientid, $clientsecret, $redirecturi, $resource, $additionalscopes);
+        // End SSAT MHA-2
 
         $client->setendpoints(array('auth' => $this->config->authendpoint, 'token' => $this->config->tokenendpoint));
         return $client;
