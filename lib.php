@@ -77,6 +77,9 @@ class AuthOidc extends Auth {
         $firstname = $idtoken->single_valued_claim('given_name');
         $lastname = $idtoken->single_valued_claim('family_name');
         //End SSAT MHA-5
+        // SSAT MHA-6
+        $studentid = $oidcuniqid;
+        // End SSAT MHA-6
         $create = false;
 
         try {
@@ -111,6 +114,9 @@ class AuthOidc extends Auth {
             $user->lastname = $lastname;
             $user->email = $email;
             $user->authinstance = $this->instanceid;
+            // SSAT MHA-6
+            $user->studentid = $studentid;
+            // End SSAT MHA-6
 
             db_begin();
             $user->username = get_new_username($username);
