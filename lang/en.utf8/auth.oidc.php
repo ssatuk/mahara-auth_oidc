@@ -13,7 +13,7 @@ defined('INTERNAL') || die();
 $string['pluginname'] = 'OpenID Connect';
 $string['title'] = 'OpenID Connect';
 $string['description'] = 'Authenticate using OpenID Connect';
-$string['login'] = 'OpenID Connect';
+$string['login'] = 'SSAT Account';
 
 $string['errorauthnoauthcode'] = 'Auth code not received.';
 $string['errorauthnocreds'] = 'Please configure OpenID Connect client credentials.';
